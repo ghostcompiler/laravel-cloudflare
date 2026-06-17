@@ -13,3 +13,9 @@ All notable changes to this project will be documented in this file.
 - Configuration publish, service provider container binds, and Laravel Facade support.
 - Fully compatible with PHP 8.2 through PHP 8.5.
 - Supported on Laravel 11 through Laravel 13.
+
+## [1.0.2] - 2026-06-17
+
+### Changed
+- Cleaned up unused variable warnings and improved inline comments.
+
