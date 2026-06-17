@@ -21,11 +21,11 @@
   --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
   --header-bg: rgba(250, 250, 250, 0.85);
   
-  /* Brand Cloudflare Orange Theme */
-  --accent: #F6821F;
-  --accent-dark: #D45B12;
-  --accent-light: rgba(246, 130, 31, 0.06);
-  --accent-glow: rgba(246, 130, 31, 0.18);
+  /* Brand Green Theme */
+  --accent: #22c55e;
+  --accent-dark: #16a34a;
+  --accent-light: rgba(34, 197, 94, 0.06);
+  --accent-glow: rgba(34, 197, 94, 0.18);
   
   --radius: 12px;
   --radius-sm: 8px;
@@ -33,7 +33,7 @@
   --green: #22c55e;
   --warning: #f59e0b;
   --error: #ef4444;
-  --glow: radial-gradient(circle at top right, rgba(246, 130, 31, 0.04), transparent 50%);
+  --glow: radial-gradient(circle at top right, rgba(34, 197, 94, 0.04), transparent 50%);
 }
 
 [data-theme="dark"] {
@@ -56,9 +56,9 @@
   --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
   --header-bg: rgba(9, 9, 11, 0.85);
   
-  --accent-light: rgba(246, 130, 31, 0.15);
-  --accent-glow: rgba(246, 130, 31, 0.25);
-  --glow: radial-gradient(circle at top right, rgba(246, 130, 31, 0.08), transparent 50%);
+  --accent-light: rgba(34, 197, 94, 0.15);
+  --accent-glow: rgba(34, 197, 94, 0.25);
+  --glow: radial-gradient(circle at top right, rgba(34, 197, 94, 0.08), transparent 50%);
 }
 
 * {
@@ -281,7 +281,7 @@ pre {
 .theme-control-btn.active {
   color: #ffffff;
   background: var(--accent);
-  box-shadow: 0 2px 5px rgba(246, 130, 31, 0.25);
+  box-shadow: 0 2px 5px rgba(34, 197, 94, 0.25);
 }
 
 .theme-control-btn svg {
