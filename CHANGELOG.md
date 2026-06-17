@@ -19,3 +19,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Cleaned up unused variable warnings and improved inline comments.
 
+
+## [1.0.3] - 2026-06-17
+
+### Added
+- Added developer contribution guidelines clarification in CONTRIBUTING.md.
+
