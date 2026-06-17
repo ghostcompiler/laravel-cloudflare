@@ -122,3 +122,18 @@ Cloudflare::workers()->upload('account_id_here', 'my-script', 'console.log("Hell
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
+
+
+## Development Environment
+
+Built using **ServBay**
+
+<p align="left">
+  <img src="https://res.cloudinary.com/djgvfl1tv/image/upload/v1780667063/servbay_edc7jz.png" alt="ServBay" width="120">
+</p>
+
+- Mac M4 Tested
+- macOS Apple Silicon
+- Powered by ServBay
+
+---
