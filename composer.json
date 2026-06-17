@@ -46,6 +46,12 @@
         "sort-packages": true,
         "allow-plugins": {
             "composer/package-versions-deprecated": true
+        },
+        "audit": {
+            "ignore": {
+                "PKSA-mdq4-51ck-6kdq": "Laravel CRLF injection is in laravel/framework which is only a dev dependency (required by orchestra/testbench) and not required by the package in production.",
+                "GHSA-5vg9-5847-vvmq": "Laravel CRLF injection is in laravel/framework which is only a dev dependency (required by orchestra/testbench) and not required by the package in production."
+            }
         }
     }
 }

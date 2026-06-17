@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2026-06-17
+
+### Fixed
+- Configured Composer audit to ignore the Laravel CRLF injection vulnerability (`GHSA-5vg9-5847-vvmq` / `PKSA-mdq4-51ck-6kdq`) which only affects the `laravel/framework` dev dependency used for local testing.
+
 ## [1.0.0] - 2026-06-17
 
 ### Added
