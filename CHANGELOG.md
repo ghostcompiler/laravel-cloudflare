@@ -25,3 +25,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Added developer contribution guidelines clarification in CONTRIBUTING.md.
 
+
+## [1.0.4] - 2026-06-17
+
+### Fixed
+- Refined test coverage and workflows configuration.
+
