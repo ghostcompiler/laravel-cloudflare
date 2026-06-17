@@ -2,15 +2,21 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\ZoneCollection;
+use Vendor\Cloudflare\DTOs\PaginationMeta;
+use Vendor\Cloudflare\DTOs\Zone;
+use Vendor\Cloudflare\Responses\PaginatedResponse;
+
 class ZoneManager extends AbstractManager
 {
-
     public function all()
     {
-        $response = $this->getRequest("zones", $this->buildQueryParams());
+        $response = $this->getRequest('zones', $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\Zone::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\ZoneCollection($items);
+            $items = array_map(fn (array $item) => Zone::fromArray($item), $data['result'] ?? []);
+
+            return new ZoneCollection($items);
         });
     }
 
@@ -22,40 +28,45 @@ class ZoneManager extends AbstractManager
     public function paginate(int $perPage = 25, int $page = 1)
     {
         $this->perPage($perPage)->page($page);
-        $response = $this->getRequest("zones", $this->buildQueryParams());
+        $response = $this->getRequest('zones', $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\Zone::fromArray($item), $data["result"] ?? []);
-            $meta = \Vendor\Cloudflare\DTOs\PaginationMeta::fromArray(array_merge($data["result_info"] ?? [], [
-                "per_page" => $this->perPage ?? 25,
-                "page" => $this->page ?? 1,
-                "total_entries" => $data["result_info"]["total_count"] ?? count($items),
-                "last_page" => isset($data["result_info"]["total_count"]) ? (int)ceil($data["result_info"]["total_count"] / ($this->perPage ?? 25)) : 1
+            $items = array_map(fn (array $item) => Zone::fromArray($item), $data['result'] ?? []);
+            $meta = PaginationMeta::fromArray(array_merge($data['result_info'] ?? [], [
+                'per_page' => $this->perPage ?? 25,
+                'page' => $this->page ?? 1,
+                'total_entries' => $data['result_info']['total_count'] ?? count($items),
+                'last_page' => isset($data['result_info']['total_count']) ? (int) ceil($data['result_info']['total_count'] / ($this->perPage ?? 25)) : 1,
             ]));
-            return new \Vendor\Cloudflare\Responses\PaginatedResponse(new \Vendor\Cloudflare\Collections\ZoneCollection($items), $meta);
+
+            return new PaginatedResponse(new ZoneCollection($items), $meta);
         });
     }
 
     public function find(string $id)
     {
         $response = $this->getRequest("zones/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Zone::fromArray($data["result"] ?? []);
+            return Zone::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(array $data)
     {
-        $response = $this->postRequest("zones", $data);
+        $response = $this->postRequest('zones', $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Zone::fromArray($data["result"] ?? []);
+            return Zone::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $id, array $data)
     {
         $response = $this->patchRequest("zones/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Zone::fromArray($data["result"] ?? []);
+            return Zone::fromArray($data['result'] ?? []);
         });
     }
 

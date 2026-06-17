@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\WorkerRouteCollection;
+use Vendor\Cloudflare\DTOs\WorkerRoute;
+
 class WorkerRouteManager extends AbstractManager
 {
-
     public function all(string $zoneId)
     {
         $response = $this->getRequest("zones/{$zoneId}/workers/routes", $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\WorkerRoute::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\WorkerRouteCollection($items);
+            $items = array_map(fn (array $item) => WorkerRoute::fromArray($item), $data['result'] ?? []);
+
+            return new WorkerRouteCollection($items);
         });
     }
 
@@ -22,24 +26,27 @@ class WorkerRouteManager extends AbstractManager
     public function find(string $zoneId, string $id)
     {
         $response = $this->getRequest("zones/{$zoneId}/workers/routes/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WorkerRoute::fromArray($data["result"] ?? []);
+            return WorkerRoute::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(string $zoneId, array $data)
     {
         $response = $this->postRequest("zones/{$zoneId}/workers/routes", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WorkerRoute::fromArray($data["result"] ?? []);
+            return WorkerRoute::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $zoneId, string $id, array $data)
     {
         $response = $this->putRequest("zones/{$zoneId}/workers/routes/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WorkerRoute::fromArray($data["result"] ?? []);
+            return WorkerRoute::fromArray($data['result'] ?? []);
         });
     }
 

@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\HealthcheckCollection;
+use Vendor\Cloudflare\DTOs\Healthcheck;
+
 class HealthcheckManager extends AbstractManager
 {
-
     public function all(string $zoneId)
     {
         $response = $this->getRequest("zones/{$zoneId}/healthchecks", $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\Healthcheck::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\HealthcheckCollection($items);
+            $items = array_map(fn (array $item) => Healthcheck::fromArray($item), $data['result'] ?? []);
+
+            return new HealthcheckCollection($items);
         });
     }
 
@@ -22,24 +26,27 @@ class HealthcheckManager extends AbstractManager
     public function find(string $zoneId, string $id)
     {
         $response = $this->getRequest("zones/{$zoneId}/healthchecks/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Healthcheck::fromArray($data["result"] ?? []);
+            return Healthcheck::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(string $zoneId, array $data)
     {
         $response = $this->postRequest("zones/{$zoneId}/healthchecks", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Healthcheck::fromArray($data["result"] ?? []);
+            return Healthcheck::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $zoneId, string $id, array $data)
     {
         $response = $this->putRequest("zones/{$zoneId}/healthchecks/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Healthcheck::fromArray($data["result"] ?? []);
+            return Healthcheck::fromArray($data['result'] ?? []);
         });
     }
 

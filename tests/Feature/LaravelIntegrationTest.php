@@ -4,9 +4,9 @@ namespace Vendor\Cloudflare\Tests\Feature;
 
 use Vendor\Cloudflare\Facades\Cloudflare;
 use Vendor\Cloudflare\Http\Client\CloudflareClient;
+use Vendor\Cloudflare\Managers\AccountManager;
 use Vendor\Cloudflare\Managers\CloudflareManager;
 use Vendor\Cloudflare\Managers\ZoneManager;
-use Vendor\Cloudflare\Managers\AccountManager;
 use Vendor\Cloudflare\Tests\TestCase;
 
 class LaravelIntegrationTest extends TestCase

@@ -2,6 +2,4 @@
 
 namespace Vendor\Cloudflare\Exceptions;
 
-class AuthorizationException extends ApiException
-{
-}
+class AuthorizationException extends ApiException {}

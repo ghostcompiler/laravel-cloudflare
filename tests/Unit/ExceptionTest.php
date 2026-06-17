@@ -22,7 +22,7 @@ class ExceptionTest extends TestCase
     public function test_validation_exception_parsing()
     {
         $details = [
-            ['code' => 10001, 'message' => 'invalid zone name']
+            ['code' => 10001, 'message' => 'invalid zone name'],
         ];
 
         $e = new ValidationException('Unprocessable Entity', 422, 'invalid_input', $details);

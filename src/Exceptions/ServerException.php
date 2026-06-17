@@ -2,6 +2,4 @@
 
 namespace Vendor\Cloudflare\Exceptions;
 
-class ServerException extends ApiException
-{
-}
+class ServerException extends ApiException {}

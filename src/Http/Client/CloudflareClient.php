@@ -63,7 +63,7 @@ class CloudflareClient
         $this->token = $token ?: ($config['token'] ?? '');
         $this->email = $email ?: ($config['email'] ?? '');
         $this->apiKey = $apiKey ?: ($config['api_key'] ?? '');
-        
+
         $this->baseUrl = $config['base_url'] ?? 'https://api.cloudflare.com/client/v4';
         $this->timeout = (int) ($config['timeout'] ?? 30);
         $this->maxRetries = (int) ($config['retries'] ?? 3);
@@ -270,7 +270,7 @@ class CloudflareClient
         ];
 
         if ($this->token !== '') {
-            $headers['Authorization'] = 'Bearer ' . $this->token;
+            $headers['Authorization'] = 'Bearer '.$this->token;
         } elseif ($this->apiKey !== '' && $this->email !== '') {
             $headers['X-Auth-Email'] = $this->email;
             $headers['X-Auth-Key'] = $this->apiKey;
@@ -333,11 +333,11 @@ class CloudflareClient
             $response = $e->getResponse();
             $status = $response->getStatusCode();
             $body = $this->decodeResponse($response);
-            
+
             // Cloudflare standard error responses
             $errors = $body['errors'] ?? [];
             $firstError = $errors[0] ?? [];
-            
+
             $message = $firstError['message'] ?? $e->getMessage();
             $errorCode = (string) ($firstError['code'] ?? '');
             $details = $errors;

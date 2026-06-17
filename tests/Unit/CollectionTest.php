@@ -2,10 +2,10 @@
 
 namespace Vendor\Cloudflare\Tests\Unit;
 
-use Vendor\Cloudflare\Collections\ZoneCollection;
 use Vendor\Cloudflare\Collections\AccountCollection;
-use Vendor\Cloudflare\DTOs\Zone;
+use Vendor\Cloudflare\Collections\ZoneCollection;
 use Vendor\Cloudflare\DTOs\Account;
+use Vendor\Cloudflare\DTOs\Zone;
 use Vendor\Cloudflare\Tests\TestCase;
 
 class CollectionTest extends TestCase

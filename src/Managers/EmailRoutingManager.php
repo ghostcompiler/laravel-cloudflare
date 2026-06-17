@@ -2,9 +2,11 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\EmailRoutingRuleCollection;
+use Vendor\Cloudflare\DTOs\EmailRoutingRule;
+
 class EmailRoutingManager extends AbstractManager
 {
-
     public function getSettings(string $zoneId)
     {
         return $this->getRequest("zones/{$zoneId}/email/routing");
@@ -23,9 +25,11 @@ class EmailRoutingManager extends AbstractManager
     public function rules(string $zoneId)
     {
         $response = $this->getRequest("zones/{$zoneId}/email/routing/rules");
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\EmailRoutingRule::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\EmailRoutingRuleCollection($items);
+            $items = array_map(fn (array $item) => EmailRoutingRule::fromArray($item), $data['result'] ?? []);
+
+            return new EmailRoutingRuleCollection($items);
         });
     }
 

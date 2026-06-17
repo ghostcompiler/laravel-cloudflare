@@ -2,6 +2,4 @@
 
 namespace Vendor\Cloudflare\Exceptions;
 
-class NetworkException extends CloudflareException
-{
-}
+class NetworkException extends CloudflareException {}

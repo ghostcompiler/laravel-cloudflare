@@ -15,7 +15,7 @@ class DTOTest extends TestCase
         $data = [
             'id' => 'acc_123',
             'name' => 'Ghost Account',
-            'settings' => ['enforce_twofactor' => true]
+            'settings' => ['enforce_twofactor' => true],
         ];
 
         $dto = Account::fromArray($data);
@@ -34,7 +34,7 @@ class DTOTest extends TestCase
             'paused' => false,
             'type' => 'full',
             'development_mode' => 0,
-            'name_servers' => ['ns1.cloudflare.com', 'ns2.cloudflare.com']
+            'name_servers' => ['ns1.cloudflare.com', 'ns2.cloudflare.com'],
         ];
 
         $dto = Zone::fromArray($data);
@@ -55,7 +55,7 @@ class DTOTest extends TestCase
             'type' => 'A',
             'content' => '1.2.3.4',
             'proxied' => true,
-            'ttl' => 1
+            'ttl' => 1,
         ];
 
         $dto = DnsRecord::fromArray($data);
@@ -77,7 +77,7 @@ class DTOTest extends TestCase
             'previous_page' => 1,
             'next_page' => 3,
             'last_page' => 5,
-            'total_entries' => 95
+            'total_entries' => 95,
         ];
 
         $dto = PaginationMeta::fromArray($data);

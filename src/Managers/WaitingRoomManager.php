@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\WaitingRoomCollection;
+use Vendor\Cloudflare\DTOs\WaitingRoom;
+
 class WaitingRoomManager extends AbstractManager
 {
-
     public function all(string $zoneId)
     {
         $response = $this->getRequest("zones/{$zoneId}/waiting_rooms", $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\WaitingRoom::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\WaitingRoomCollection($items);
+            $items = array_map(fn (array $item) => WaitingRoom::fromArray($item), $data['result'] ?? []);
+
+            return new WaitingRoomCollection($items);
         });
     }
 
@@ -22,24 +26,27 @@ class WaitingRoomManager extends AbstractManager
     public function find(string $zoneId, string $id)
     {
         $response = $this->getRequest("zones/{$zoneId}/waiting_rooms/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WaitingRoom::fromArray($data["result"] ?? []);
+            return WaitingRoom::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(string $zoneId, array $data)
     {
         $response = $this->postRequest("zones/{$zoneId}/waiting_rooms", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WaitingRoom::fromArray($data["result"] ?? []);
+            return WaitingRoom::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $zoneId, string $id, array $data)
     {
         $response = $this->putRequest("zones/{$zoneId}/waiting_rooms/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WaitingRoom::fromArray($data["result"] ?? []);
+            return WaitingRoom::fromArray($data['result'] ?? []);
         });
     }
 

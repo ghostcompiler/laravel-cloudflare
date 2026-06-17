@@ -2,6 +2,4 @@
 
 namespace Vendor\Cloudflare\Exceptions;
 
-class CloudflareException extends \Exception
-{
-}
+class CloudflareException extends \Exception {}

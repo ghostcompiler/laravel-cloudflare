@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\AccessApplicationCollection;
+use Vendor\Cloudflare\DTOs\AccessApplication;
+
 class AccessApplicationManager extends AbstractManager
 {
-
     public function all(string $accountId)
     {
         $response = $this->getRequest("accounts/{$accountId}/access/apps", $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\AccessApplication::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\AccessApplicationCollection($items);
+            $items = array_map(fn (array $item) => AccessApplication::fromArray($item), $data['result'] ?? []);
+
+            return new AccessApplicationCollection($items);
         });
     }
 
@@ -22,24 +26,27 @@ class AccessApplicationManager extends AbstractManager
     public function find(string $accountId, string $id)
     {
         $response = $this->getRequest("accounts/{$accountId}/access/apps/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\AccessApplication::fromArray($data["result"] ?? []);
+            return AccessApplication::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(string $accountId, array $data)
     {
         $response = $this->postRequest("accounts/{$accountId}/access/apps", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\AccessApplication::fromArray($data["result"] ?? []);
+            return AccessApplication::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $accountId, string $id, array $data)
     {
         $response = $this->putRequest("accounts/{$accountId}/access/apps/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\AccessApplication::fromArray($data["result"] ?? []);
+            return AccessApplication::fromArray($data['result'] ?? []);
         });
     }
 

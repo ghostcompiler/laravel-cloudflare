@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\WorkerScriptCollection;
+use Vendor\Cloudflare\DTOs\WorkerScript;
+
 class WorkerScriptManager extends AbstractManager
 {
-
     public function all(string $accountId)
     {
         $response = $this->getRequest("accounts/{$accountId}/workers/scripts");
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\WorkerScript::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\WorkerScriptCollection($items);
+            $items = array_map(fn (array $item) => WorkerScript::fromArray($item), $data['result'] ?? []);
+
+            return new WorkerScriptCollection($items);
         });
     }
 
@@ -22,36 +26,38 @@ class WorkerScriptManager extends AbstractManager
     public function find(string $accountId, string $name)
     {
         $response = $this->getRequest("accounts/{$accountId}/workers/scripts/{$name}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WorkerScript::fromArray($data["result"] ?? []);
+            return WorkerScript::fromArray($data['result'] ?? []);
         });
     }
 
     public function upload(string $accountId, string $name, string $scriptContent, array $metadata = [])
     {
         $options = [
-            "headers" => ["Content-Type" => "application/javascript"],
-            "body" => $scriptContent
+            'headers' => ['Content-Type' => 'application/javascript'],
+            'body' => $scriptContent,
         ];
-        if (!empty($metadata)) {
+        if (! empty($metadata)) {
             $options = [
-                "multipart" => [
+                'multipart' => [
                     [
-                        "name" => "metadata",
-                        "contents" => json_encode($metadata),
-                        "headers" => ["Content-Type" => "application/json"]
+                        'name' => 'metadata',
+                        'contents' => json_encode($metadata),
+                        'headers' => ['Content-Type' => 'application/json'],
                     ],
                     [
-                        "name" => "script",
-                        "contents" => $scriptContent,
-                        "headers" => ["Content-Type" => "application/javascript"]
-                    ]
-                ]
+                        'name' => 'script',
+                        'contents' => $scriptContent,
+                        'headers' => ['Content-Type' => 'application/javascript'],
+                    ],
+                ],
             ];
         }
-        $response = $this->client->request("PUT", "accounts/{$accountId}/workers/scripts/{$name}", $options);
+        $response = $this->client->request('PUT', "accounts/{$accountId}/workers/scripts/{$name}", $options);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\WorkerScript::fromArray($data["result"] ?? []);
+            return WorkerScript::fromArray($data['result'] ?? []);
         });
     }
 

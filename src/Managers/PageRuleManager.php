@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\PageRuleCollection;
+use Vendor\Cloudflare\DTOs\PageRule;
+
 class PageRuleManager extends AbstractManager
 {
-
     public function all(string $zoneId)
     {
         $response = $this->getRequest("zones/{$zoneId}/pagerules", $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\PageRule::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\PageRuleCollection($items);
+            $items = array_map(fn (array $item) => PageRule::fromArray($item), $data['result'] ?? []);
+
+            return new PageRuleCollection($items);
         });
     }
 
@@ -22,24 +26,27 @@ class PageRuleManager extends AbstractManager
     public function find(string $zoneId, string $id)
     {
         $response = $this->getRequest("zones/{$zoneId}/pagerules/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\PageRule::fromArray($data["result"] ?? []);
+            return PageRule::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(string $zoneId, array $data)
     {
         $response = $this->postRequest("zones/{$zoneId}/pagerules", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\PageRule::fromArray($data["result"] ?? []);
+            return PageRule::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $zoneId, string $id, array $data)
     {
         $response = $this->putRequest("zones/{$zoneId}/pagerules/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\PageRule::fromArray($data["result"] ?? []);
+            return PageRule::fromArray($data['result'] ?? []);
         });
     }
 

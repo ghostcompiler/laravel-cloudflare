@@ -2,6 +2,4 @@
 
 namespace Vendor\Cloudflare\Exceptions;
 
-class NotFoundException extends ApiException
-{
-}
+class NotFoundException extends ApiException {}

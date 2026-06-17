@@ -2,15 +2,19 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\Collections\TunnelCollection;
+use Vendor\Cloudflare\DTOs\Tunnel;
+
 class TunnelManager extends AbstractManager
 {
-
     public function all(string $accountId)
     {
         $response = $this->getRequest("accounts/{$accountId}/cfd_tunnel", $this->buildQueryParams());
+
         return $this->hydrate($response, function (array $data) {
-            $items = array_map(fn (array $item) => \Vendor\Cloudflare\DTOs\Tunnel::fromArray($item), $data["result"] ?? []);
-            return new \Vendor\Cloudflare\Collections\TunnelCollection($items);
+            $items = array_map(fn (array $item) => Tunnel::fromArray($item), $data['result'] ?? []);
+
+            return new TunnelCollection($items);
         });
     }
 
@@ -22,24 +26,27 @@ class TunnelManager extends AbstractManager
     public function find(string $accountId, string $id)
     {
         $response = $this->getRequest("accounts/{$accountId}/cfd_tunnel/{$id}");
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Tunnel::fromArray($data["result"] ?? []);
+            return Tunnel::fromArray($data['result'] ?? []);
         });
     }
 
     public function create(string $accountId, array $data)
     {
         $response = $this->postRequest("accounts/{$accountId}/cfd_tunnel", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Tunnel::fromArray($data["result"] ?? []);
+            return Tunnel::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(string $accountId, string $id, array $data)
     {
         $response = $this->patchRequest("accounts/{$accountId}/cfd_tunnel/{$id}", $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\Tunnel::fromArray($data["result"] ?? []);
+            return Tunnel::fromArray($data['result'] ?? []);
         });
     }
 

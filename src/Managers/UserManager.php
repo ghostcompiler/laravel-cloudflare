@@ -2,32 +2,35 @@
 
 namespace Vendor\Cloudflare\Managers;
 
+use Vendor\Cloudflare\DTOs\User;
+
 class UserManager extends AbstractManager
 {
-
     public function get()
     {
-        $response = $this->getRequest("user");
+        $response = $this->getRequest('user');
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\User::fromArray($data["result"] ?? []);
+            return User::fromArray($data['result'] ?? []);
         });
     }
 
     public function update(array $data)
     {
-        $response = $this->patchRequest("user", $data);
+        $response = $this->patchRequest('user', $data);
+
         return $this->hydrate($response, function (array $data) {
-            return \Vendor\Cloudflare\DTOs\User::fromArray($data["result"] ?? []);
+            return User::fromArray($data['result'] ?? []);
         });
     }
 
     public function tokens()
     {
-        return $this->getRequest("user/tokens");
+        return $this->getRequest('user/tokens');
     }
 
     public function verifyToken()
     {
-        return $this->getRequest("user/tokens/verify");
+        return $this->getRequest('user/tokens/verify');
     }
 }
