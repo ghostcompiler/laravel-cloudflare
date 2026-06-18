@@ -16,10 +16,8 @@
 </p>
 
 <p align="center">
-  <a href="https://packagist.org/packages/ghostcompiler/laravel-cloudflare">
-    <img src="https://img.shields.io/packagist/dt/ghostcompiler/laravel-cloudflare?style=flat-square&color=8b5cf6&labelColor=1e1b4b" alt="Packagist Downloads" />
-  </a>
-  <img src="https://badgen.net/github/stars/ghostcompiler/laravel-cloudflare?color=06b6d4&labelColor=111827&style=flat-square" alt="GitHub Stars" />
+    <img src="https://img.shields.io/github/stars/ghostcompiler/laravel-cloudflare?style=for-the-badge&logo=github" />
+    <img src="https://img.shields.io/packagist/dt/ghostcompiler/laravel-cloudflare?style=for-the-badge&logo=packagist" />
 </p>
 
 ---
